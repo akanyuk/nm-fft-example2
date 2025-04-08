@@ -1,21 +1,29 @@
 # .github/workflows/release.yaml
 
 on:
+  push:
   release:
     types: [created]
 
-permissions:
-    contents: write
-    packages: write
-
 jobs:
-  release-linux-amd64:
-    name: release linux/amd64
+  xgo:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: wangyoucao577/go-release-action@v1
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        goos: linux
-        goarch: amd64
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Build
+        uses: crazy-max/ghaction-xgo@v3
+        with:
+          xgo_version: latest
+          go_version: 1.21
+          dest: build
+          prefix: myapp
+          targets: windows/amd64,linux/amd64,linux/arm64,darwin/arm64
+          v: true
+          x: false
+          race: false
+          ldflags: -s -w
+          buildmode: default
+          trimpath: true
