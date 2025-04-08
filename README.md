@@ -8,5 +8,5 @@ See [example.asm](example.asm) for an example of usage.
 ## Usage
 
 ```sh
-./nm-fft-example2 -port 9000 -room test -r 48000
+./nm-fft-example2 -port 9000 -r 48000
 ```

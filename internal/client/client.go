@@ -21,13 +21,6 @@ type Client struct {
 	send    chan []byte
 }
 
-type message struct {
-	room   string
-	nick   string
-	msg    []byte
-	sender *Client
-}
-
 func NewClient(conn *websocket.Conn, referee *Referee, room string, nick string) *Client {
 	return &Client{
 		referee: referee,
